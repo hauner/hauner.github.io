@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Scully 0.0.0">
+  <meta charset="utf-8">
+  <title>Software Noise</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="assets/avatar-480x480.png">
+<link rel="stylesheet" href="styles.css"><style></style><script charset="utf-8" src="common-es2015.js"></script><script charset="utf-8" src="2-es2015.js"></script><script charset="utf-8" src="7-es2015.js"></script><style>.published.stacked[_ngcontent-ncl-c12]{text-align:center}.stats.stacked[_ngcontent-ncl-c12]{display:flex;flex-wrap:wrap;justify-content:center;width:100%}.stats.stacked[_ngcontent-ncl-c12]   li[_ngcontent-ncl-c12]{width:100%;text-align:center;border-left:none;line-height:2;margin:0;padding:0}.post[_ngcontent-ncl-c12] > header[_ngcontent-ncl-c12]   .title[_ngcontent-ncl-c12]   h2[_ngcontent-ncl-c12]{font-weight:900;font-size:1.75em}.post[_ngcontent-ncl-c12] > header[_ngcontent-ncl-c12]   .title[_ngcontent-ncl-c12]   h2[_ngcontent-ncl-c12], header[_ngcontent-ncl-c12]   p[_ngcontent-ncl-c12]{text-transform:none;letter-spacing:.1em}header[_ngcontent-ncl-c12]   p[_ngcontent-ncl-c12]{font-size:.9em}</style><style>a.logo[_ngcontent-ncl-c9]{display:flex;align-items:center}a.logo[_ngcontent-ncl-c9]   img[_ngcontent-ncl-c9]{margin-right:.5rem;width:2rem}a.oap[_ngcontent-ncl-c9]{display:flex;align-items:center}a.oap[_ngcontent-ncl-c9]   img[_ngcontent-ncl-c9]{width:2.5rem}@media screen and (max-width:980px){#header[_ngcontent-ncl-c9]   .links[_ngcontent-ncl-c9]{display:block}}@media screen and (max-width:736px){li.hide[_ngcontent-ncl-c9]{display:none!important}}</style><style>
+      :host {
+        display: none;
+      }
+      scully-content {
+        display: none;
+      }
+    </style><script>window['ScullyIO']='generated';</script></head>
+<body scully-version="0.0.0">
+  <app-root _nghost-ncl-c7="" ng-version="9.1.7"><router-outlet _ngcontent-ncl-c7=""></router-outlet><app-blog _nghost-ncl-c12=""><div _ngcontent-ncl-c12="" id="wrapper">
+
+  <app-header _ngcontent-ncl-c12="" _nghost-ncl-c9=""><header _ngcontent-ncl-c9="" id="header"><h1 _ngcontent-ncl-c9=""><a _ngcontent-ncl-c9="" class="logo" href="/"><img _ngcontent-ncl-c9="" src="assets/avatar-480x480.png" alt="avatar"><span _ngcontent-ncl-c9="">Software Noise</span></a></h1><nav _ngcontent-ncl-c9="" class="links"><ul _ngcontent-ncl-c9="" style="display: flex; justify-content: flex-end; height: 100%; align-items: center; margin-right: 2rem;"><li _ngcontent-ncl-c9=""><a _ngcontent-ncl-c9="" href="https://hauner.github.io/openapi-processor" class="oap"><img _ngcontent-ncl-c9="" src="assets/openapi-processor-p.svg" alt="openapi-processor"><span _ngcontent-ncl-c9="">openapi-processor</span></a></li><li _ngcontent-ncl-c9="" class="hide"><a _ngcontent-ncl-c9="" href="https://openapi-processor-playground.appspot.com/" class="oap"><img _ngcontent-ncl-c9="" src="assets/openapi-processor-p.svg" alt="oappenapi-processor playground"><span _ngcontent-ncl-c9="">playground</span></a></li></ul></nav></header></app-header>
+
+  <div _ngcontent-ncl-c12="" id="main">
+
+    <div _ngcontent-ncl-c12="">
+
+      <article _ngcontent-ncl-c12="" class="post">
+
+        
+
+        <header _ngcontent-ncl-c12="">
+          <div _ngcontent-ncl-c12="" class="title">
+            <h2 _ngcontent-ncl-c12="">openapi-processor-spring</h2>
+            <p _ngcontent-ncl-c12="">openapi-processor-spring is an OpenAPI interface &amp; model Java code generator for Spring Boot.</p>
+          </div>
+          <div _ngcontent-ncl-c12="" class="meta">
+            <time _ngcontent-ncl-c12="" class="published stacked" datetime="2020-05-25T00:00:00.000Z">25. May 2020</time>
+
+            <div _ngcontent-ncl-c12="" class="tags">
+              <ul _ngcontent-ncl-c12="" class="stats stacked">
+                <li _ngcontent-ncl-c12="">
+                  <a _ngcontent-ncl-c12="" href="/tags/openapi">
+                    <span _ngcontent-ncl-c12="" class="icon solid fa-tag">openapi</span>
+                  </a>
+                </li><li _ngcontent-ncl-c12="">
+                  <a _ngcontent-ncl-c12="" href="/tags/spring-boot">
+                    <span _ngcontent-ncl-c12="" class="icon solid fa-tag">spring-boot</span>
+                  </a>
+                </li><!---->
+              </ul>
+            </div>
+
+          </div>
+        </header><!---->
+
+        <!---->
+
+        <div _ngcontent-ncl-c12="">
+          <!--scullyContent-begin--><div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12=""><a href="https://hauner.github.io/openapi-processor" _ngcontent-ncl-c12=""><strong _ngcontent-ncl-c12="">openapi-processor-spring</strong></a> (or short: <em _ngcontent-ncl-c12="">oap-spring</em>) is an <a href="https://www.openapis.org/" _ngcontent-ncl-c12="">OpenAPI</a>
+interface &amp; model Java code generator for <a href="https://spring.io/projects/spring-boot" _ngcontent-ncl-c12="">Spring Boot</a>. It is generating code
+for annotation based (MVC) controllers.
+<sup class="footnote" _ngcontent-ncl-c12="">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote." _ngcontent-ncl-c12="">1</a>]</sup></p>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">Its goal is to provide a smooth &amp; straight forward mapping from an OpenAPI yaml description to
+Spring Boot Java code:</p>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">allowing common Spring Boot code patterns, like passing additional parameters (for example
+<code _ngcontent-ncl-c12="">HttpServletRequest</code> or <code _ngcontent-ncl-c12="">HandlerMethodArgumentResolver</code>) to controller endpoints without adding it
+to the OpenAPI description</p>
+</li>
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">providing an easy mapping to existing Java types with (simple) generic support</p>
+</li>
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">getting out of the way if the processor does not create the expected code for single endpoints.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">You will need a gradle based spring boot project and the <a href="https://hauner.github.io/openapi-processor/gradle" _ngcontent-ncl-c12="">oap-gradle plugin</a>
+to use oap-spring.</p>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">See the quick overview below for how it works or check the following links:</p>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12=""><a href="https://hauner.github.io/openapi-processor" target="_blank" rel="noopener" _ngcontent-ncl-c12="">Learn more about openapi-processor-spring</a>.</p>
+</li>
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12=""><a href="https://openapi-processor-playground.appspot.com" target="_blank" rel="noopener" _ngcontent-ncl-c12="">Try the openapi-processor playground</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">Current 1.0 milestone releases are:</p>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12=""><code _ngcontent-ncl-c12="">com.github.hauner.openapi:openapi-processor-spring:1.0.0.M14</code></p>
+</li>
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12=""><code _ngcontent-ncl-c12="">com.github.hauner.openapi:openapi-processor-gradle:1.0.0.M7</code></p>
+</li>
+</ul>
+</div>
+<div class="sect1" _ngcontent-ncl-c12="">
+<h2 id="_usage_overview" _ngcontent-ncl-c12="">usage overview</h2>
+<div class="sectionbody" _ngcontent-ncl-c12="">
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">Here is a quick usage overview. A more detailed description is available in the <a href="https://hauner.github.io/openapi-processor" _ngcontent-ncl-c12="">documentation</a>.</p>
+</div>
+<div class="sect2" _ngcontent-ncl-c12="">
+<h3 id="_api_processor_configuration" _ngcontent-ncl-c12="">api &amp; processor configuration</h3>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">First, we put an <code _ngcontent-ncl-c12="">openapi.yaml</code> with our OpenAPI description in the <code _ngcontent-ncl-c12="">src/api</code> folder of our project.
+We put another yaml file <code _ngcontent-ncl-c12="">mapping.yaml</code> into the same place. This is the configuration of the processor.</p>
+</div>
+<div class="literalblock" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<pre _ngcontent-ncl-c12="">/src/api/
+   openapi.yaml
+   mapping.yaml</pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">the minimum content of the <code _ngcontent-ncl-c12="">mapping.yaml</code> is the target package name for the code the processor
+generates. It will create two sub-packages <code _ngcontent-ncl-c12="">api</code> and <code _ngcontent-ncl-c12="">model</code> for the endpoint interfaces and the
+model classes.</p>
+</div>
+<div class="listingblock" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<pre class="highlight" _ngcontent-ncl-c12=""><code class="language-yaml" data-lang="yaml" _ngcontent-ncl-c12="">options:
+  package-name: com.github.hauner.openapi</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2" _ngcontent-ncl-c12="">
+<h3 id="_gradle_configuration" _ngcontent-ncl-c12="">gradle configuration</h3>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">To enable the processor we add the following snippets to the <code _ngcontent-ncl-c12="">build.gradle</code>:</p>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">add the oap-gradle plugin</p>
+</li>
+</ul>
+</div>
+<div class="listingblock" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<pre class="highlight" _ngcontent-ncl-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ncl-c12="">plugins {
+    id 'com.github.hauner.openapi-processor' version '1.0.0.M7'
+}</code></pre>
+</div>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">next is the plugin configuration for oap-spring. <code _ngcontent-ncl-c12="">apiPath</code>, <code _ngcontent-ncl-c12="">mapping</code> &amp; <code _ngcontent-ncl-c12="">targetDir</code> configure
+the paths of the input files, and the processor configuration file. <code _ngcontent-ncl-c12="">processor</code> is like a
+dependency in the standard gradle <code _ngcontent-ncl-c12="">dependencies</code> block and tells the plugin which processor to
+use. The plugin will create a <code _ngcontent-ncl-c12="">processSpring</code> task to run the given <code _ngcontent-ncl-c12="">processor</code>.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<pre class="highlight" _ngcontent-ncl-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ncl-c12="">openapiProcessor {
+    apiPath "${projectDir}/src/api/openapi.yaml"
+
+    spring {
+        processor 'com.github.hauner.openapi:openapi-processor-spring:1.0.0.M14'
+        mapping "${projectDir}/src/api/mapping.yaml"
+        targetDir "${projectDir}/build/openapi"
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="ulist" _ngcontent-ncl-c12="">
+<ul _ngcontent-ncl-c12="">
+<li _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">last step is to include the generated files into the build. With standard gradle configurations
+we add the <code _ngcontent-ncl-c12="">targetDir</code> to the <code _ngcontent-ncl-c12="">java</code> source set so that gradle will compile them. To automatically
+re-generate the api when necessary we add the <code _ngcontent-ncl-c12="">processSpring</code> task as a dependency to the
+<code _ngcontent-ncl-c12="">compileJava</code> task.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<pre class="highlight" _ngcontent-ncl-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ncl-c12="">sourceSets {
+    main {
+        java {
+            srcDir "${projectDir}/build/openapi"
+        }
+    }
+}
+
+compileJava.dependsOn ('processSpring')</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">Now when we change <code _ngcontent-ncl-c12="">openapi.yaml</code> or <code _ngcontent-ncl-c12="">mapping.yaml</code> gradle automatically runs the processor to
+update the api code before it is compiling the rest of our code.</p>
+</div>
+<div class="paragraph" _ngcontent-ncl-c12="">
+<p _ngcontent-ncl-c12="">That’s it. <i class="far fa-smile" _ngcontent-ncl-c12=""></i></p>
+</div>
+<div class="imageblock text-center" _ngcontent-ncl-c12="">
+<div class="content" _ngcontent-ncl-c12="">
+<a class="image" href="https://hauner.github.io/openapi-processor" _ngcontent-ncl-c12=""><img src="assets/openapi-processor-spring@400x200.png" alt="logo" width="180" _ngcontent-ncl-c12=""></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes" _ngcontent-ncl-c12="">
+<hr _ngcontent-ncl-c12="">
+<div class="footnote" id="_footnotedef_1" _ngcontent-ncl-c12="">
+<a href="#_footnoteref_1" _ngcontent-ncl-c12="">1</a>. oap-spring has experimental support for <code _ngcontent-ncl-c12="">Mono&lt;&gt;</code> and <code _ngcontent-ncl-c12="">Flux&lt;&gt;</code> like wrappers that makes it possible to use WebFlux with annotations.
+</div>
+</div><!--scullyContent-end--><script>try {window['scullyContent'] = {cssId:"_ngcontent-ncl-c12",html:document.body.innerHTML.split('<!--scullyContent-begin-->')[1].split('<!--scullyContent-end-->')[0]};} catch(e) {console.error('scully could not parse content');}</script><scully-content _ngcontent-ncl-c12=""></scully-content>
+        </div>
+
+        <footer _ngcontent-ncl-c12="">
+          
+        </footer>
+      </article>
+
+      
+      
+
+    </div>
+
+    
+
+  </div>
+
+  <app-sidebar _ngcontent-ncl-c12="" _nghost-ncl-c10=""><section _ngcontent-ncl-c10="" id="sidebar"><section _ngcontent-ncl-c10="" id="intro"><a _ngcontent-ncl-c10="" class="logo" href="/"><img _ngcontent-ncl-c10="" src="assets/avatar-480x480.png" alt="avatar"></a><header _ngcontent-ncl-c10=""><p _ngcontent-ncl-c10="">my Exocortex Memory :-)</p></header></section><section _ngcontent-ncl-c10=""><ul _ngcontent-ncl-c10="" class="posts"><li _ngcontent-ncl-c10=""><article _ngcontent-ncl-c10=""><header _ngcontent-ncl-c10=""><h3 _ngcontent-ncl-c10="" style="margin-bottom: 0;"><a _ngcontent-ncl-c10="" href="/blog/2020/openapi-processor-spring">openapi-processor-spring</a></h3><div _ngcontent-ncl-c10="" class="tags"><ul _ngcontent-ncl-c10="" class="stats"><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/openapi"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">openapi</span></a></li><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/spring-boot"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">spring-boot</span></a></li><!----></ul></div><time _ngcontent-ncl-c10="" class="published" datetime="2020-05-25T00:00:00.000Z">25. May 2020</time></header></article></li><li _ngcontent-ncl-c10=""><article _ngcontent-ncl-c10=""><header _ngcontent-ncl-c10=""><h3 _ngcontent-ncl-c10="" style="margin-bottom: 0;"><a _ngcontent-ncl-c10="" href="/blog/remember/java-macos">java on macos</a></h3><div _ngcontent-ncl-c10="" class="tags"><ul _ngcontent-ncl-c10="" class="stats"><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/java"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">java</span></a></li><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/macos"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">macos</span></a></li><!----></ul></div><time _ngcontent-ncl-c10="" class="published" datetime="2020-05-24T00:00:00.000Z">24. May 2020</time></header></article></li><li _ngcontent-ncl-c10=""><article _ngcontent-ncl-c10=""><header _ngcontent-ncl-c10=""><h3 _ngcontent-ncl-c10="" style="margin-bottom: 0;"><a _ngcontent-ncl-c10="" href="/blog/2020/rxjs-custom-operator">Extracting a custom RxJS operator</a></h3><div _ngcontent-ncl-c10="" class="tags"><ul _ngcontent-ncl-c10="" class="stats"><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/rxjs"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">rxjs</span></a></li><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/angular"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-ncl-c10="" class="published" datetime="2020-05-12T00:00:00.000Z">12. May 2020</time></header></article></li><li _ngcontent-ncl-c10=""><article _ngcontent-ncl-c10=""><header _ngcontent-ncl-c10=""><h3 _ngcontent-ncl-c10="" style="margin-bottom: 0;"><a _ngcontent-ncl-c10="" href="/blog/2020/angular-body-class">Modifying &lt;body&gt; css classes in Angular</a></h3><div _ngcontent-ncl-c10="" class="tags"><ul _ngcontent-ncl-c10="" class="stats"><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="/tags/angular"><span _ngcontent-ncl-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-ncl-c10="" class="published" datetime="2020-05-05T00:00:00.000Z">05. May 2020</time></header></article></li><!----></ul></section><!----><section _ngcontent-ncl-c10="" id="footer"><ul _ngcontent-ncl-c10="" class="icons"><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="https://twitter.com/MartinHauner" class="icon brands fa-twitter"><span _ngcontent-ncl-c10="" class="label">Twitter</span></a></li><li _ngcontent-ncl-c10=""><a _ngcontent-ncl-c10="" href="https://github.com/hauner" class="icon brands fa-github"><span _ngcontent-ncl-c10="" class="label">GitHub</span></a></li></ul><p _ngcontent-ncl-c10="" class="copyright" style="margin-bottom: 1rem;">© Martin Hauner <span _ngcontent-ncl-c10="" style="display: block;">design by <a _ngcontent-ncl-c10="" href="http://html5up.net">HTML5 UP</a></span><span _ngcontent-ncl-c10="">built with <a _ngcontent-ncl-c10="" href="https://github.com/scullyio/scully">Scully</a></span></p></section></section></app-sidebar>
+
+</div>
+</app-blog><!----></app-root>
+<script id="ScullyIO-transfer-state"></script><script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule="" defer=""></script><script src="polyfills-es5.js" nomodule="" defer=""></script><script src="polyfills-es2015.js" type="module"></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule="" defer=""></script>
+
+</body></html>
