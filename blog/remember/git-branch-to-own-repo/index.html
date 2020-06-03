@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Scully 0.0.0">
+  <meta charset="utf-8">
+  <title>Software Noise</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="assets/avatar-480x480.png">
+<link rel="stylesheet" href="styles.css"><style></style><script charset="utf-8" src="common-es2015.js"></script><script charset="utf-8" src="2-es2015.js"></script><script charset="utf-8" src="7-es2015.js"></script><style>.published.stacked[_ngcontent-gcg-c12]{text-align:center}.stats.stacked[_ngcontent-gcg-c12]{display:flex;flex-wrap:wrap;justify-content:center;width:100%}.stats.stacked[_ngcontent-gcg-c12]   li[_ngcontent-gcg-c12]{width:100%;text-align:center;border-left:none;line-height:2;margin:0;padding:0}.post[_ngcontent-gcg-c12] > header[_ngcontent-gcg-c12]   .title[_ngcontent-gcg-c12]   h2[_ngcontent-gcg-c12]{font-weight:900;font-size:1.75em}.post[_ngcontent-gcg-c12] > header[_ngcontent-gcg-c12]   .title[_ngcontent-gcg-c12]   h2[_ngcontent-gcg-c12], header[_ngcontent-gcg-c12]   p[_ngcontent-gcg-c12]{text-transform:none;letter-spacing:.1em}header[_ngcontent-gcg-c12]   p[_ngcontent-gcg-c12]{font-size:.9em}</style><style>a.logo[_ngcontent-gcg-c9]{display:flex;align-items:center}a.logo[_ngcontent-gcg-c9]   img[_ngcontent-gcg-c9]{margin-right:.5rem;width:2rem}a.oap[_ngcontent-gcg-c9]{display:flex;align-items:center}a.oap[_ngcontent-gcg-c9]   img[_ngcontent-gcg-c9]{width:2.5rem}@media screen and (max-width:980px){#header[_ngcontent-gcg-c9]   .links[_ngcontent-gcg-c9]{display:block}}@media screen and (max-width:736px){li.hide[_ngcontent-gcg-c9]{display:none!important}}</style><style>
+      :host {
+        display: none;
+      }
+      scully-content {
+        display: none;
+      }
+    </style><script>window['ScullyIO']='generated';</script></head>
+<body scully-version="0.0.0">
+  <app-root _nghost-gcg-c7="" ng-version="9.1.7"><router-outlet _ngcontent-gcg-c7=""></router-outlet><app-blog _nghost-gcg-c12=""><div _ngcontent-gcg-c12="" id="wrapper">
+
+  <app-header _ngcontent-gcg-c12="" _nghost-gcg-c9=""><header _ngcontent-gcg-c9="" id="header"><h1 _ngcontent-gcg-c9=""><a _ngcontent-gcg-c9="" class="logo" href="/"><img _ngcontent-gcg-c9="" src="assets/avatar-480x480.png" alt="avatar"><span _ngcontent-gcg-c9="">Software Noise</span></a></h1><nav _ngcontent-gcg-c9="" class="links"><ul _ngcontent-gcg-c9="" style="display: flex; justify-content: flex-end; height: 100%; align-items: center; margin-right: 2rem;"><li _ngcontent-gcg-c9=""><a _ngcontent-gcg-c9="" href="https://hauner.github.io/openapi-processor" class="oap"><img _ngcontent-gcg-c9="" src="assets/openapi-processor-p.svg" alt="openapi-processor"><span _ngcontent-gcg-c9="">openapi-processor</span></a></li><li _ngcontent-gcg-c9="" class="hide"><a _ngcontent-gcg-c9="" href="https://openapi-processor-playground.appspot.com/" class="oap"><img _ngcontent-gcg-c9="" src="assets/openapi-processor-p.svg" alt="oappenapi-processor playground"><span _ngcontent-gcg-c9="">playground</span></a></li></ul></nav></header></app-header>
+
+  <div _ngcontent-gcg-c12="" id="main">
+
+    <div _ngcontent-gcg-c12="">
+
+      <article _ngcontent-gcg-c12="" class="post">
+
+        
+
+        <header _ngcontent-gcg-c12="">
+          <div _ngcontent-gcg-c12="" class="title">
+            <h2 _ngcontent-gcg-c12="">create new git repository from a branch</h2>
+            <p _ngcontent-gcg-c12="">how to copy a git branch to its own git repository as master branch</p>
+          </div>
+          <div _ngcontent-gcg-c12="" class="meta">
+            <time _ngcontent-gcg-c12="" class="published stacked" datetime="2020-06-02T00:00:00.000Z">02. Jun 2020</time>
+
+            <div _ngcontent-gcg-c12="" class="tags">
+              <ul _ngcontent-gcg-c12="" class="stats stacked">
+                <li _ngcontent-gcg-c12="">
+                  <a _ngcontent-gcg-c12="" href="/tags/git">
+                    <span _ngcontent-gcg-c12="" class="icon solid fa-tag">git</span>
+                  </a>
+                </li><!---->
+              </ul>
+            </div>
+
+          </div>
+        </header><!---->
+
+        <!---->
+
+        <div _ngcontent-gcg-c12="">
+          <!--scullyContent-begin--><div class="paragraph" _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">The following steps create a new git repository with a master branch from a branch of a source repository.</p>
+</div>
+<div class="paragraph" _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">The steps refer to a source repository with the name <code _ngcontent-gcg-c12="">source-clone</code> and a source branch with the name
+<code _ngcontent-gcg-c12="">source-branch</code>. After finishing the steps there is a <code _ngcontent-gcg-c12="">new-clone</code> clone from the new repository
+<code _ngcontent-gcg-c12="">new-bare-repo</code> with a master branch including the full history.</p>
+</div>
+<div class="olist arabic" _ngcontent-gcg-c12="">
+<ol class="arabic" _ngcontent-gcg-c12="">
+<li _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">create new repository folder &amp; init git in new repository</p>
+<div class="listingblock" _ngcontent-gcg-c12="">
+<div class="content" _ngcontent-gcg-c12="">
+<pre class="highlight" _ngcontent-gcg-c12=""><code class="language-shell" data-lang="shell" _ngcontent-gcg-c12="">&gt; mkdir new-bare-repo
+&gt; git --bare init new-bare-repo</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12=""><code _ngcontent-gcg-c12="">--bare</code> creates a repository without a workspace, otherwise (without <code _ngcontent-gcg-c12="">--bare</code>) the <code _ngcontent-gcg-c12="">push</code> in
+   the next step would fail with</p>
+</div>
+<div class="literalblock" _ngcontent-gcg-c12="">
+<div class="content" _ngcontent-gcg-c12="">
+<pre _ngcontent-gcg-c12="">"error: refusing to update checked out branch: refs/heads/master"</pre>
+</div>
+</div>
+</li>
+<li _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">copy source branch to master as master to new repository</p>
+<div class="listingblock" _ngcontent-gcg-c12="">
+<div class="content" _ngcontent-gcg-c12="">
+<pre class="highlight" _ngcontent-gcg-c12=""><code class="language-shell" data-lang="shell" _ngcontent-gcg-c12="">&gt; cd source-clone
+&gt; git push ../new-bare-repo source-branch:master
+&gt; cd ..</code></pre>
+</div>
+</div>
+</li>
+<li _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">clone from the new bare repository</p>
+<div class="listingblock" _ngcontent-gcg-c12="">
+<div class="content" _ngcontent-gcg-c12="">
+<pre class="highlight" _ngcontent-gcg-c12=""><code class="language-shell" data-lang="shell" _ngcontent-gcg-c12=""> &gt; git clone ./new-bare-repo new-clone</code></pre>
+</div>
+</div>
+</li>
+<li _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">push to github</p>
+<div class="listingblock" _ngcontent-gcg-c12="">
+<div class="content" _ngcontent-gcg-c12="">
+<pre class="highlight" _ngcontent-gcg-c12=""><code class="language-shell" data-lang="shell" _ngcontent-gcg-c12=""> &gt; cd ./new-clone
+ &gt; git remote add origin https://github.com/&lt;user&gt;/&lt;remote-repo&gt;.git
+ &gt; git push -u origin master</code></pre>
+</div>
+</div>
+</li>
+<li _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">cleanup</p>
+<div class="paragraph" _ngcontent-gcg-c12="">
+<p _ngcontent-gcg-c12="">now that the new repository is on github the <code _ngcontent-gcg-c12="">new-bare-repo</code> is no longer needed.</p>
+</div>
+</li>
+</ol>
+</div><!--scullyContent-end--><script>try {window['scullyContent'] = {cssId:"_ngcontent-gcg-c12",html:document.body.innerHTML.split('<!--scullyContent-begin-->')[1].split('<!--scullyContent-end-->')[0]};} catch(e) {console.error('scully could not parse content');}</script><scully-content _ngcontent-gcg-c12=""></scully-content>
+        </div>
+
+        <footer _ngcontent-gcg-c12="">
+          
+        </footer>
+      </article>
+
+      
+      
+
+    </div>
+
+    
+
+  </div>
+
+  <app-sidebar _ngcontent-gcg-c12="" _nghost-gcg-c10=""><section _ngcontent-gcg-c10="" id="sidebar"><section _ngcontent-gcg-c10="" id="intro"><a _ngcontent-gcg-c10="" class="logo" href="/"><img _ngcontent-gcg-c10="" src="assets/avatar-480x480.png" alt="avatar"></a><header _ngcontent-gcg-c10=""><p _ngcontent-gcg-c10="">my Exocortex Memory :-)</p></header></section><section _ngcontent-gcg-c10=""><ul _ngcontent-gcg-c10="" class="posts"><li _ngcontent-gcg-c10=""><article _ngcontent-gcg-c10=""><header _ngcontent-gcg-c10=""><h3 _ngcontent-gcg-c10="" style="margin-bottom: 0;"><a _ngcontent-gcg-c10="" href="/blog/remember/git-branch-to-own-repo">create new git repository from a branch</a></h3><div _ngcontent-gcg-c10="" class="tags"><ul _ngcontent-gcg-c10="" class="stats"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/git"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">git</span></a></li><!----></ul></div><time _ngcontent-gcg-c10="" class="published" datetime="2020-06-02T00:00:00.000Z">02. Jun 2020</time></header></article></li><li _ngcontent-gcg-c10=""><article _ngcontent-gcg-c10=""><header _ngcontent-gcg-c10=""><h3 _ngcontent-gcg-c10="" style="margin-bottom: 0;"><a _ngcontent-gcg-c10="" href="/blog/2020/openapi-processor-spring">openapi-processor-spring</a></h3><div _ngcontent-gcg-c10="" class="tags"><ul _ngcontent-gcg-c10="" class="stats"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/openapi"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">openapi</span></a></li><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/spring-boot"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">spring-boot</span></a></li><!----></ul></div><time _ngcontent-gcg-c10="" class="published" datetime="2020-05-25T00:00:00.000Z">25. May 2020</time></header></article></li><li _ngcontent-gcg-c10=""><article _ngcontent-gcg-c10=""><header _ngcontent-gcg-c10=""><h3 _ngcontent-gcg-c10="" style="margin-bottom: 0;"><a _ngcontent-gcg-c10="" href="/blog/remember/java-macos">java on macos</a></h3><div _ngcontent-gcg-c10="" class="tags"><ul _ngcontent-gcg-c10="" class="stats"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/java"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">java</span></a></li><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/macos"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">macos</span></a></li><!----></ul></div><time _ngcontent-gcg-c10="" class="published" datetime="2020-05-24T00:00:00.000Z">24. May 2020</time></header></article></li><li _ngcontent-gcg-c10=""><article _ngcontent-gcg-c10=""><header _ngcontent-gcg-c10=""><h3 _ngcontent-gcg-c10="" style="margin-bottom: 0;"><a _ngcontent-gcg-c10="" href="/blog/2020/rxjs-custom-operator">Extracting a custom RxJS operator</a></h3><div _ngcontent-gcg-c10="" class="tags"><ul _ngcontent-gcg-c10="" class="stats"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/rxjs"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">rxjs</span></a></li><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/angular"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-gcg-c10="" class="published" datetime="2020-05-12T00:00:00.000Z">12. May 2020</time></header></article></li><li _ngcontent-gcg-c10=""><article _ngcontent-gcg-c10=""><header _ngcontent-gcg-c10=""><h3 _ngcontent-gcg-c10="" style="margin-bottom: 0;"><a _ngcontent-gcg-c10="" href="/blog/2020/angular-body-class">Modifying &lt;body&gt; css classes in Angular</a></h3><div _ngcontent-gcg-c10="" class="tags"><ul _ngcontent-gcg-c10="" class="stats"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="/tags/angular"><span _ngcontent-gcg-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-gcg-c10="" class="published" datetime="2020-05-05T00:00:00.000Z">05. May 2020</time></header></article></li><!----></ul></section><!----><section _ngcontent-gcg-c10="" id="footer"><ul _ngcontent-gcg-c10="" class="icons"><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="https://twitter.com/MartinHauner" class="icon brands fa-twitter"><span _ngcontent-gcg-c10="" class="label">Twitter</span></a></li><li _ngcontent-gcg-c10=""><a _ngcontent-gcg-c10="" href="https://github.com/hauner" class="icon brands fa-github"><span _ngcontent-gcg-c10="" class="label">GitHub</span></a></li></ul><p _ngcontent-gcg-c10="" class="copyright" style="margin-bottom: 1rem;">© Martin Hauner <span _ngcontent-gcg-c10="" style="display: block;">design by <a _ngcontent-gcg-c10="" href="http://html5up.net">HTML5 UP</a></span><span _ngcontent-gcg-c10="">built with <a _ngcontent-gcg-c10="" href="https://github.com/scullyio/scully">Scully</a></span></p></section></section></app-sidebar>
+
+</div>
+</app-blog><!----></app-root>
+<script id="ScullyIO-transfer-state"></script><script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule="" defer=""></script><script src="polyfills-es5.js" nomodule="" defer=""></script><script src="polyfills-es2015.js" type="module"></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule="" defer=""></script>
+
+</body></html>
