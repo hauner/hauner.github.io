@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Scully 0.0.0">
+  <meta charset="utf-8">
+  <title>Software Noise</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="assets/avatar-480x480.png">
+<link rel="stylesheet" href="styles.css"><style></style><script charset="utf-8" src="common-es2015.js"></script><script charset="utf-8" src="2-es2015.js"></script><script charset="utf-8" src="7-es2015.js"></script><style>.published.stacked[_ngcontent-ioi-c12]{text-align:center}.stats.stacked[_ngcontent-ioi-c12]{display:flex;flex-wrap:wrap;justify-content:center;width:100%}.stats.stacked[_ngcontent-ioi-c12]   li[_ngcontent-ioi-c12]{width:100%;text-align:center;border-left:none;line-height:2;margin:0;padding:0}.post[_ngcontent-ioi-c12] > header[_ngcontent-ioi-c12]   .title[_ngcontent-ioi-c12]   h2[_ngcontent-ioi-c12]{font-weight:900;font-size:1.75em}.post[_ngcontent-ioi-c12] > header[_ngcontent-ioi-c12]   .title[_ngcontent-ioi-c12]   h2[_ngcontent-ioi-c12], header[_ngcontent-ioi-c12]   p[_ngcontent-ioi-c12]{text-transform:none;letter-spacing:.1em}header[_ngcontent-ioi-c12]   p[_ngcontent-ioi-c12]{font-size:.9em}</style><style>a.logo[_ngcontent-ioi-c9]{display:flex;align-items:center}a.logo[_ngcontent-ioi-c9]   img[_ngcontent-ioi-c9]{margin-right:.5rem;width:2rem}a.oap[_ngcontent-ioi-c9]{display:flex;align-items:center}a.oap[_ngcontent-ioi-c9]   img[_ngcontent-ioi-c9]{width:2.5rem}@media screen and (max-width:980px){#header[_ngcontent-ioi-c9]   .links[_ngcontent-ioi-c9]{display:block}}@media screen and (max-width:736px){li.hide[_ngcontent-ioi-c9]{display:none!important}}</style><style>
+      :host {
+        display: none;
+      }
+      scully-content {
+        display: none;
+      }
+    </style><script>window['ScullyIO']='generated';</script></head>
+<body scully-version="0.0.0">
+  <app-root _nghost-ioi-c7="" ng-version="9.1.7"><router-outlet _ngcontent-ioi-c7=""></router-outlet><app-blog _nghost-ioi-c12=""><div _ngcontent-ioi-c12="" id="wrapper">
+
+  <app-header _ngcontent-ioi-c12="" _nghost-ioi-c9=""><header _ngcontent-ioi-c9="" id="header"><h1 _ngcontent-ioi-c9=""><a _ngcontent-ioi-c9="" class="logo" href="/"><img _ngcontent-ioi-c9="" src="assets/avatar-480x480.png" alt="avatar"><span _ngcontent-ioi-c9="">Software Noise</span></a></h1><nav _ngcontent-ioi-c9="" class="links"><ul _ngcontent-ioi-c9="" style="display: flex; justify-content: flex-end; height: 100%; align-items: center; margin-right: 2rem;"><li _ngcontent-ioi-c9=""><a _ngcontent-ioi-c9="" href="https://hauner.github.io/openapi-processor" class="oap"><img _ngcontent-ioi-c9="" src="assets/openapi-processor-p.svg" alt="openapi-processor"><span _ngcontent-ioi-c9="">openapi-processor</span></a></li><li _ngcontent-ioi-c9="" class="hide"><a _ngcontent-ioi-c9="" href="https://openapi-processor-playground.appspot.com/" class="oap"><img _ngcontent-ioi-c9="" src="assets/openapi-processor-p.svg" alt="oappenapi-processor playground"><span _ngcontent-ioi-c9="">playground</span></a></li></ul></nav></header></app-header>
+
+  <div _ngcontent-ioi-c12="" id="main">
+
+    <div _ngcontent-ioi-c12="">
+
+      <article _ngcontent-ioi-c12="" class="post">
+
+        
+
+        <header _ngcontent-ioi-c12="">
+          <div _ngcontent-ioi-c12="" class="title">
+            <h2 _ngcontent-ioi-c12="">fixing a (transitive) dependency mess with gradle</h2>
+            <p _ngcontent-ioi-c12="">how to make gradle use the expected versions of transitive dependencies</p>
+          </div>
+          <div _ngcontent-ioi-c12="" class="meta">
+            <time _ngcontent-ioi-c12="" class="published stacked" datetime="2020-06-07T00:00:00.000Z">07. Jun 2020</time>
+
+            <div _ngcontent-ioi-c12="" class="tags">
+              <ul _ngcontent-ioi-c12="" class="stats stacked">
+                <li _ngcontent-ioi-c12="">
+                  <a _ngcontent-ioi-c12="" href="/tags/gradle">
+                    <span _ngcontent-ioi-c12="" class="icon solid fa-tag">gradle</span>
+                  </a>
+                </li><!---->
+              </ul>
+            </div>
+
+          </div>
+        </header><!---->
+
+        <!---->
+
+        <div _ngcontent-ioi-c12="">
+          <!--scullyContent-begin--><div class="sect1" _ngcontent-ioi-c12="">
+<h2 id="_the_transitive_dependency_mess" _ngcontent-ioi-c12="">the transitive dependency mess</h2>
+<div class="sectionbody" _ngcontent-ioi-c12="">
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">While extracting openapi-processor-core from <a href="https://hauner.github.io/openapi-processor" target="_blank" rel="noopener" _ngcontent-ioi-c12="">openapi-processor-spring</a>
+I noticed IDEA listing duplicate dependencies with different and sometimes unexpected versions in
+the external libraries section o the project view.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">In this case jackson packages.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Running <code _ngcontent-ioi-c12="">gradle dependencies</code> to see where they are coming from I received the following output (
+look for <code _ngcontent-ioi-c12="">jackson</code>):</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="title" _ngcontent-ioi-c12="">gradle dependencies snippet</div>
+<div class="content" _ngcontent-ioi-c12="">
+<pre _ngcontent-ioi-c12="">+--- com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.11.0
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.11.0
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0
+|    \--- org.jetbrains.kotlin:kotlin-reflect:1.3.61
+|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.61 -&gt; 1.3.72 (*)
++--- org.openapi4j:openapi-parser:1.0
+|    \--- org.openapi4j:openapi-core:1.0
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.9.10 -&gt; 2.11.0 (*)
+|         \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.10 -&gt; 2.10.2
+|              +--- org.yaml:snakeyaml:1.24
+|              \--- com.fasterxml.jackson.core:jackson-core:2.10.2 -&gt; 2.11.0
++--- io.swagger.parser.v3:swagger-parser:2.0.20
+|    +--- io.swagger.parser.v3:swagger-parser-v3:2.0.20
+|    |    +--- io.swagger.core.v3:swagger-models:2.1.2
+|    |    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0
+|    |    +--- io.swagger.core.v3:swagger-core:2.1.2
+|    |    |    +--- jakarta.xml.bind:jakarta.xml.bind-api:2.3.2
+|    |    |    |    \--- jakarta.activation:jakarta.activation-api:1.2.1
+|    |    |    +--- org.apache.commons:commons-lang3:3.7
+|    |    |    +--- org.slf4j:slf4j-api:1.7.25 -&gt; 1.7.30
+|    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.10.1 -&gt; 2.11.0 (*)
+|    |    |    +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.1 -&gt; 2.10.2 (*)
+|    |    |    +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1
+|    |    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0
+|    |    |    |    +--- com.fasterxml.jackson.core:jackson-core:2.10.1 -&gt; 2.11.0
+|    |    |    |    \--- com.fasterxml.jackson.core:jackson-databind:2.10.1 -&gt; 2.11.0 (*)
+|    |    |    +--- io.swagger.core.v3:swagger-models:2.1.2 (*)
+|    |    |    \--- jakarta.validation:jakarta.validation-api:2.0.2
+|    |    +--- io.swagger.parser.v3:swagger-parser-core:2.0.20
+|    |    |    \--- io.swagger.core.v3:swagger-models:2.1.2 (*)
+|    |    +--- commons-io:commons-io:2.6
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.10.2 -&gt; 2.11.0
+|    |    +--- com.fasterxml.jackson.core:jackson-databind:2.10.2 -&gt; 2.11.0 (*)
+|    |    \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.2 (*)
+|    +--- org.slf4j:slf4j-ext:1.7.30
+|    |    \--- org.slf4j:slf4j-api:1.7.30
+|    +--- org.slf4j:slf4j-api:1.7.30
+|    \--- commons-io:commons-io:2.6</pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Noticed something?</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Yes, there is a bit of a mess of jackson packages and versions.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">The following 3 packages are direct dependencies (as gradle calls them) of my project and all of
+them use different jackson versions:</p>
+</div>
+<div class="ulist" _ngcontent-ioi-c12="">
+<ul _ngcontent-ioi-c12="">
+<li _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0</code></p>
+</li>
+<li _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">org.openapi4j:openapi-parser:1.0</code></p>
+</li>
+<li _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">io.swagger.parser.v3:swagger-parser:2.0.20</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Since the first one <code _ngcontent-ioi-c12="">com.fasterxml.jackson.module:jackson-module-kotlin</code> is a jackson package itself
+it is clear why gradle picks up <strong _ngcontent-ioi-c12="">2.11.0</strong> for the packages, and it should use that version for any
+other jackson package.</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="title" _ngcontent-ioi-c12="">jackson-module-kotlin: simplified</div>
+<div class="content" _ngcontent-ioi-c12="">
+<pre _ngcontent-ioi-c12="">+--- com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0
+     +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0
+     +--- com.fasterxml.jackson.core:jackson-core:2.11.0
+     \--- com.fasterxml.jackson.core:jackson-databind:2.11.0</pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Next one is <code _ngcontent-ioi-c12="">org.openapi4j:openapi-parser:1.0</code>. This one depends on jackson <strong _ngcontent-ioi-c12="">2.9.10</strong> and gradle
+upgrades everything to <strong _ngcontent-ioi-c12="">2.11.0</strong> because that is the newest version it found.</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="title" _ngcontent-ioi-c12="">openapi-parser: simplified</div>
+<div class="content" _ngcontent-ioi-c12="">
+<pre _ngcontent-ioi-c12="">+--- org.openapi4j:openapi-parser:1.0
+     +--- com.fasterxml.jackson.core:jackson-core:2.10.2 -&gt; 2.11.0
+     +--- com.fasterxml.jackson.core:jackson-databind:2.9.10 -&gt; 2.11.0 (*)
+     \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.10 -&gt; 2.10.2</pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Oh, not for all, it doesn’t use <strong _ngcontent-ioi-c12="">2.11.0</strong> for <code _ngcontent-ioi-c12="">jackson-dataformat-yaml</code>.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">It is not using <strong _ngcontent-ioi-c12="">2.11.0</strong> because gradle has not seen a newer version of <code _ngcontent-ioi-c12="">jackson-dataformat-yaml</code>
+than <strong _ngcontent-ioi-c12="">2.9.10</strong>. So first guess is, it should be <strong _ngcontent-ioi-c12="">2.9.10</strong>.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">That is not true though, the third direct dependency <code _ngcontent-ioi-c12="">io.swagger.parser.v3:swagger-parser:2.0.20</code> is
+using <strong _ngcontent-ioi-c12="">2.10.1</strong> and <strong _ngcontent-ioi-c12="">2.10.2</strong>.</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="title" _ngcontent-ioi-c12="">swagger-parser: simplified</div>
+<div class="content" _ngcontent-ioi-c12="">
+<pre _ngcontent-ioi-c12="">+--- io.swagger.parser.v3:swagger-parser:2.0.20
+     +--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0
+     +--- com.fasterxml.jackson.core:jackson-core:2.10.1 -&gt; 2.11.0
+     +--- com.fasterxml.jackson.core:jackson-databind:2.10.1 -&gt; 2.11.0
+     +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.1 -&gt; 2.10.2
+     \--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1</pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><strong _ngcontent-ioi-c12="">2.10.2</strong> for <code _ngcontent-ioi-c12="">jackson-dataformat-yaml</code>. This is the highest version for it so gradle picks that.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">so finally gradle picked the following versions:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch" _ngcontent-ioi-c12="">
+<colgroup _ngcontent-ioi-c12="">
+<col style="width: 50%;" _ngcontent-ioi-c12="">
+<col style="width: 50%;" _ngcontent-ioi-c12="">
+</colgroup>
+<thead _ngcontent-ioi-c12="">
+<tr _ngcontent-ioi-c12="">
+<th class="tableblock halign-left valign-top" _ngcontent-ioi-c12="">package (stripped com.fasterxml.jackson.)</th>
+<th class="tableblock halign-left valign-top" _ngcontent-ioi-c12="">version</th>
+</tr>
+</thead>
+<tbody _ngcontent-ioi-c12="">
+<tr _ngcontent-ioi-c12="">
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">core:jackson-annotations</code></p></td>
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12="">2.11.0</p></td>
+</tr>
+<tr _ngcontent-ioi-c12="">
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">core:jackson-core</code></p></td>
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12="">2.11.0</p></td>
+</tr>
+<tr _ngcontent-ioi-c12="">
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">core:jackson-databind</code></p></td>
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12="">2.11.0</p></td>
+</tr>
+<tr _ngcontent-ioi-c12="">
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">dataformat:jackson-dataformat-yaml</code></p></td>
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12="">2.10.2   ⇒ want 2.11.0</p></td>
+</tr>
+<tr _ngcontent-ioi-c12="">
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12=""><code _ngcontent-ioi-c12="">datatype:jackson-datatype-jsr310</code></p></td>
+<td class="tableblock halign-left valign-top" _ngcontent-ioi-c12=""><p class="tableblock" _ngcontent-ioi-c12="">2.10.1 ⇒ want 2.11.0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">There are two possible solutions to make all jackson packages use the expected version.</p>
+</div>
+</div>
+</div>
+<div class="sect1" _ngcontent-ioi-c12="">
+<h2 id="_solution" _ngcontent-ioi-c12="">solution</h2>
+<div class="sectionbody" _ngcontent-ioi-c12="">
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">According to the gradle documentation the preferred solution is to add a <code _ngcontent-ioi-c12="">constraints</code> block to the
+<code _ngcontent-ioi-c12="">dependencies</code> and not to add a direct dependency:</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><a href="https://docs.gradle.org/current/userguide/dependency_constraints.html" target="_blank" rel="noopener" _ngcontent-ioi-c12="">gradle constraints</a></p>
+</div>
+<div class="quoteblock" _ngcontent-ioi-c12="">
+<blockquote _ngcontent-ioi-c12="">
+Often developers incorrectly fix transitive dependency issues by adding direct dependencies. To
+avoid this, Gradle provides the concept of dependency constraints.
+</blockquote>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Modifying the dependency resolution rules is not an option either:</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12=""><a href="https://docs.gradle.org/current/userguide/resolution_rules.html#sec:dependency_resolve_rules" target="_blank" rel="noopener" _ngcontent-ioi-c12="">gradle dependency resolve rules</a></p>
+</div>
+<div class="quoteblock" _ngcontent-ioi-c12="">
+<blockquote _ngcontent-ioi-c12="">
+If you are authoring a library, you should always prefer dependency constraints as they are
+published for your consumers.
+</blockquote>
+</div>
+<div class="sect2" _ngcontent-ioi-c12="">
+<h3 id="_constraints" _ngcontent-ioi-c12="">constraints</h3>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">I have a library and here is how constraints look like in the <code _ngcontent-ioi-c12="">build.gradle</code>:</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="content" _ngcontent-ioi-c12="">
+<pre class="highlight" _ngcontent-ioi-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ioi-c12="">ext {
+    jacksonVersion = '2.11.0'
+}
+
+dependencies {
+    // .. dependencies ..
+
+    constraints {
+        implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion") {
+            because 'use the same version for all jackson packages'
+        }
+        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion") {
+            because 'use the same version for all jackson packages'
+        }
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Nice, this fixes the issue. :-)</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Too bad each single package requires its own constraint. It would be nice to use wildcards to
+match all jackson packages with a single constraint:</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="content" _ngcontent-ioi-c12="">
+<pre class="highlight" _ngcontent-ioi-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ioi-c12="">ext {
+    jacksonVersion = '2.11.0'
+}
+
+dependencies {
+    // .. dependencies ..
+
+    constraints {
+        // does NOT work
+        implementation("com.fasterxml.jackson.*:*:$jacksonVersion") {
+            because 'use the same version for all jackson packages'
+        }
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">That would be a bit shorter but unfortunately it does not work.</p>
+</div>
+</div>
+<div class="sect2" _ngcontent-ioi-c12="">
+<h3 id="_platform" _ngcontent-ioi-c12="">platform</h3>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">I found another solution in the gradle documentation that even uses jackson as an example:
+<a href="https://docs.gradle.org/current/userguide/dependency_version_alignment.html" target="_blank" rel="noopener" _ngcontent-ioi-c12="">gradle dependency version alignment</a>.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">First step is to create a metadata rule that joins all jackson packages into a <strong _ngcontent-ioi-c12="">platform</strong>. Jackson
+has a platform bom that lists all packages belonging to a platform version, and it is used to create
+the platform rule:</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="content" _ngcontent-ioi-c12="">
+<pre class="highlight" _ngcontent-ioi-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ioi-c12="">class JacksonPlatformRule implements ComponentMetadataRule {
+    void execute (ComponentMetadataContext ctx) {
+        ctx.details.with {
+            if (id.group.startsWith ("com.fasterxml.jackson")) {
+                belongsTo ("com.fasterxml.jackson:jackson-bom:${id.version}", false)
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">I simply added the class at the end of the <code _ngcontent-ioi-c12="">build.gradle</code>.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">Second step is to activate the rule in the <code _ngcontent-ioi-c12="">dependencies</code> block:</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="content" _ngcontent-ioi-c12="">
+<pre class="highlight" _ngcontent-ioi-c12=""><code class="language-groovy" data-lang="groovy" _ngcontent-ioi-c12="">dependencies {
+    components.all(JacksonPlatformRule)
+
+    // .. dependencies ..
+}</code></pre>
+</div>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">By grouping the packages gradle selects the jackson platform with the highest version and uses the
+versions listed in the bom for any jackson package.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">This is also visible in the output of <code _ngcontent-ioi-c12="">gradle dependencies</code> (starting at line 4). Gradle selected
+the <strong _ngcontent-ioi-c12="">2.11.0</strong> platform module and upgraded all jackson packages to the platform version:</p>
+</div>
+<div class="listingblock" _ngcontent-ioi-c12="">
+<div class="title" _ngcontent-ioi-c12="">gradle dependencies snippet</div>
+<div class="content" _ngcontent-ioi-c12="">
+<pre _ngcontent-ioi-c12="">+--- com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.11.0
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0
+|    |    |    \--- com.fasterxml.jackson:jackson-bom:2.11.0
+|    |    |         +--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
+|    |    |         +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0 (c)
+|    |    |         +--- com.fasterxml.jackson.core:jackson-core:2.11.0 (c)
+|    |    |         +--- com.fasterxml.jackson.core:jackson-databind:2.11.0 (c)
+|    |    |         +--- com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0 (c)
+|    |    |         +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.0 (c)
+|    |    |         \--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.0 (c)
+|    |    +--- com.fasterxml.jackson.core:jackson-core:2.11.0
+|    |    |    \--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
+|    |    \--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0 (*)
+|    +--- org.jetbrains.kotlin:kotlin-reflect:1.3.61
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.61 -&gt; 1.3.72 (*)
+|    \--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
++--- org.openapi4j:openapi-parser:1.0
+|    \--- org.openapi4j:openapi-core:1.0
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.9.10 -&gt; 2.11.0 (*)
+|         \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.10 -&gt; 2.11.0
+|              +--- com.fasterxml.jackson.core:jackson-databind:2.11.0 (*)
+|              +--- org.yaml:snakeyaml:1.26
+|              +--- com.fasterxml.jackson.core:jackson-core:2.11.0 (*)
+|              \--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
++--- io.swagger.parser.v3:swagger-parser:2.0.20
+|    +--- io.swagger.parser.v3:swagger-parser-v3:2.0.20
+|    |    +--- io.swagger.core.v3:swagger-models:2.1.2
+|    |    |    \--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0 (*)
+|    |    +--- io.swagger.core.v3:swagger-core:2.1.2
+|    |    |    +--- jakarta.xml.bind:jakarta.xml.bind-api:2.3.2
+|    |    |    |    \--- jakarta.activation:jakarta.activation-api:1.2.1
+|    |    |    +--- org.apache.commons:commons-lang3:3.7
+|    |    |    +--- org.slf4j:slf4j-api:1.7.25 -&gt; 1.7.30
+|    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.10.1 -&gt; 2.11.0 (*)
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.10.1 -&gt; 2.11.0 (*)
+|    |    |    +--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.1 -&gt; 2.11.0 (*)
+|    |    |    +--- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.1 -&gt; 2.11.0
+|    |    |    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.11.0 (*)
+|    |    |    |    +--- com.fasterxml.jackson.core:jackson-core:2.11.0 (*)
+|    |    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.11.0 (*)
+|    |    |    |    \--- com.fasterxml.jackson:jackson-bom:2.11.0 (*)
+|    |    |    +--- io.swagger.core.v3:swagger-models:2.1.2 (*)
+|    |    |    \--- jakarta.validation:jakarta.validation-api:2.0.2
+|    |    +--- io.swagger.parser.v3:swagger-parser-core:2.0.20
+|    |    |    \--- io.swagger.core.v3:swagger-models:2.1.2 (*)
+|    |    +--- commons-io:commons-io:2.6
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.10.2 -&gt; 2.11.0 (*)
+|    |    +--- com.fasterxml.jackson.core:jackson-databind:2.10.2 -&gt; 2.11.0 (*)
+|    |    \--- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.2 -&gt; 2.11.0 (*)
+|    +--- org.slf4j:slf4j-ext:1.7.30
+|    |    \--- org.slf4j:slf4j-api:1.7.30
+|    +--- org.slf4j:slf4j-api:1.7.30
+|    \--- commons-io:commons-io:2.6</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1" _ngcontent-ioi-c12="">
+<h2 id="_conclusion" _ngcontent-ioi-c12="">conclusion</h2>
+<div class="sectionbody" _ngcontent-ioi-c12="">
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">The <code _ngcontent-ioi-c12="">constraints</code> solution is simple and easy to use to fix single dependencies, and the platform
+rule is the way to go for groups of packages like jackson.</p>
+</div>
+<div class="paragraph" _ngcontent-ioi-c12="">
+<p _ngcontent-ioi-c12="">That’s it. <i class="far fa-smile" _ngcontent-ioi-c12=""></i></p>
+</div>
+</div>
+</div><!--scullyContent-end--><script>try {window['scullyContent'] = {cssId:"_ngcontent-ioi-c12",html:document.body.innerHTML.split('<!--scullyContent-begin-->')[1].split('<!--scullyContent-end-->')[0]};} catch(e) {console.error('scully could not parse content');}</script><scully-content _ngcontent-ioi-c12=""></scully-content>
+        </div>
+
+        <footer _ngcontent-ioi-c12="">
+          
+        </footer>
+      </article>
+
+      
+      
+
+    </div>
+
+    
+
+  </div>
+
+  <app-sidebar _ngcontent-ioi-c12="" _nghost-ioi-c10=""><section _ngcontent-ioi-c10="" id="sidebar"><section _ngcontent-ioi-c10="" id="intro"><a _ngcontent-ioi-c10="" class="logo" href="/"><img _ngcontent-ioi-c10="" src="assets/avatar-480x480.png" alt="avatar"></a><header _ngcontent-ioi-c10=""><p _ngcontent-ioi-c10="">my Exocortex Memory :-)</p></header></section><section _ngcontent-ioi-c10=""><ul _ngcontent-ioi-c10="" class="posts"><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/2020/gradle-dependencies">fixing a (transitive) dependency mess with gradle</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/gradle"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">gradle</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-06-07T00:00:00.000Z">07. Jun 2020</time></header></article></li><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/remember/git-branch-to-own-repo">create new git repository from a branch</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/git"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">git</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-06-02T00:00:00.000Z">02. Jun 2020</time></header></article></li><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/2020/openapi-processor-spring">openapi-processor-spring</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/openapi"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">openapi</span></a></li><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/spring-boot"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">spring-boot</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-05-25T00:00:00.000Z">25. May 2020</time></header></article></li><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/remember/java-macos">java on macos</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/java"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">java</span></a></li><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/macos"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">macos</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-05-24T00:00:00.000Z">24. May 2020</time></header></article></li><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/2020/rxjs-custom-operator">Extracting a custom RxJS operator</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/rxjs"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">rxjs</span></a></li><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/angular"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-05-12T00:00:00.000Z">12. May 2020</time></header></article></li><li _ngcontent-ioi-c10=""><article _ngcontent-ioi-c10=""><header _ngcontent-ioi-c10=""><h3 _ngcontent-ioi-c10="" style="margin-bottom: 0;"><a _ngcontent-ioi-c10="" href="/blog/2020/angular-body-class">Modifying &lt;body&gt; css classes in Angular</a></h3><div _ngcontent-ioi-c10="" class="tags"><ul _ngcontent-ioi-c10="" class="stats"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="/tags/angular"><span _ngcontent-ioi-c10="" class="icon solid fa-tag">angular</span></a></li><!----></ul></div><time _ngcontent-ioi-c10="" class="published" datetime="2020-05-05T00:00:00.000Z">05. May 2020</time></header></article></li><!----></ul></section><!----><section _ngcontent-ioi-c10="" id="footer"><ul _ngcontent-ioi-c10="" class="icons"><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="https://twitter.com/MartinHauner" class="icon brands fa-twitter"><span _ngcontent-ioi-c10="" class="label">Twitter</span></a></li><li _ngcontent-ioi-c10=""><a _ngcontent-ioi-c10="" href="https://github.com/hauner" class="icon brands fa-github"><span _ngcontent-ioi-c10="" class="label">GitHub</span></a></li></ul><p _ngcontent-ioi-c10="" class="copyright" style="margin-bottom: 1rem;">© Martin Hauner <span _ngcontent-ioi-c10="" style="display: block;">design by <a _ngcontent-ioi-c10="" href="http://html5up.net">HTML5 UP</a></span><span _ngcontent-ioi-c10="">built with <a _ngcontent-ioi-c10="" href="https://github.com/scullyio/scully">Scully</a></span></p></section></section></app-sidebar>
+
+</div>
+</app-blog><!----></app-root>
+<script id="ScullyIO-transfer-state"></script><script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule="" defer=""></script><script src="polyfills-es5.js" nomodule="" defer=""></script><script src="polyfills-es2015.js" type="module"></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule="" defer=""></script>
+
+</body></html>
